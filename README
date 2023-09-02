@@ -6,7 +6,7 @@ The result of stl-secator is SVG files.
 They are parts of one big poster (in general case) to be printed on small printer and pasted together.
 Moreover, stl-secator outputs in stdout a data of cross section to display its by gnuplot for example.
 
-Tested on Debian GNU/Linux 11 (bullseye)
+Tested on Debian GNU/Linux 11 (bullseye) and now it is not finished.
 
 Usage:
   stl-secator [options] <ascii_stl_file>

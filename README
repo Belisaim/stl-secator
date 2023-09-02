@@ -1,7 +1,7 @@
 Utility stl-secator is intended to make cross section of 3D object stored in ASCII STL file by the plane z = 0.
 It is assumed to be used together with admesh utility.
 Admesh cans convert binary STL to ASCII STL, move and turn 3D object in order to make cross section in any place of object.
-Bash script geves possibility to automate this process.
+Bash script gives possibility to automate this process.
 The result of stl-secator is SVG files.
 They are parts of one big poster (in general case) to be printed on small printer and pasted together.
 Moreover, stl-secator outputs in stdout a data of cross section to display its by gnuplot for example.

@@ -21,6 +21,7 @@ Options:
   --no-legend   Do not print markers in SVG pictures.
                 By default false.
   --no-preview  Do not create preview SVG file.
+                By default false.
 
 Example:
   ./stl-secator --margin=15 --format=297:420 boat.stl &>/dev/null

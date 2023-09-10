@@ -1,7 +1,6 @@
 // Page.h
 
 #include "SVG.h"
-#include "Options.h"
 #include <assert.h>
 #include <string>
 #include <vector>

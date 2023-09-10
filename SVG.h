@@ -1,10 +1,8 @@
 // SVG.h
 
-#define MARGIN_mm   10
-#define PRINTER_DPI 600
+#include "Options.h"
 
-const float PrintDPmm = PRINTER_DPI / 25.4;
-const int MarginPixels = MARGIN_mm * PrintDPmm;
+const float PrintDPmm = Opt.printer_dpi / 25.4;
 
 class SVG
 {

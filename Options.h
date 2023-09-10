@@ -10,6 +10,7 @@ public:
   char *stl_file;
   float margin;    // in millimeters
   float format[2]; // in millimeters
+  int printer_dpi; // dots per inch
   bool no_legend, no_preview;
 
   Options();
@@ -27,6 +28,7 @@ Options::Options()
   margin = 10;
   format[0] = 210; format[1] = 297; // A4
   no_legend = no_preview = false;
+  printer_dpi = 600;
 }
 
 //-------------------------------------------------
@@ -43,8 +45,17 @@ void Options::init (char **cmdstr, int n)
 //---------------------------------------
 bool Options::recognize (char *option)
 {
+  char *p;
   if (strstr (option, "--no-preview")) { no_preview = true; return true; }
   if (strstr (option, "--no-legend" )) { no_legend  = true; return true; }
+  if (p = strstr (option, "--dpi=" )) { printer_dpi = atoi (p += 6); return true; }
+  if (p = strstr (option, "--margin=" )) { margin = atof (p += 9); return true; }
+  if (p = strstr (option, "--format=" )) {
+    format[0] = atof (p += 9);
+    if (!(p = strchr (p, ':'))) { perror ("option format: no \':\'"); exit (-11); }
+    format[1] = atof (++p);
+    return true;
+  }
   return false;
 }
 

@@ -5,8 +5,9 @@ Bash script gives possibility to automate this process.
 The result of stl-secator is SVG files.
 They are parts of one big poster (in general case) to be printed on small printer and pasted together.
 Moreover, stl-secator outputs in stdout a data of cross section to display its by gnuplot for example.
+Different messages are directed into the stderr.
 
-Tested on Debian GNU/Linux 11 (bullseye) and now it is not finished.
+Tested on Debian GNU/Linux 11 (bullseye)
 
 Usage:
   stl-secator [options] <ascii_stl_file>
@@ -18,6 +19,9 @@ Options:
   --format=x:y  Format of the paper.
                 x, y are float, millimeters.
                 By default format A4: x = 210, y = 297.
+  --dpi=n       Dots per inch, integer.
+                It will be needed to set the same value before printing in a program for printing (Gimp, for example).
+                By default 600.
   --no-legend   Do not print markers in SVG pictures.
                 By default false.
   --no-preview  Do not create preview SVG file.

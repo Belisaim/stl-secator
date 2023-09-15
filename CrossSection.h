@@ -1,6 +1,5 @@
 // CrossSection.h
 
-#include "geometry.h"
 #include <stdlib.h>
 #include "Page.h"
 
@@ -44,7 +43,7 @@ void CrossSection::find_minmax()
   hori_size = maxx - minx;
   vert_size = maxy - miny;
   fprintf (stderr, "Horizontal size: %.0fpx (%.0fmm).\nVertical size: %.0fpx (%.0fmm).\n\n",
-    hori_size * PrintDPmm, hori_size, vert_size * PrintDPmm, vert_size
+    hori_size * Opt.PrintDPmm, hori_size, vert_size * Opt.PrintDPmm, vert_size
   );
 
 }

@@ -36,7 +36,8 @@ void Page::write_SVG (const char *prefix, int h_pg, int v_pg)
 {
   int i, k = curve_part.size();
   string marker = prefix;
-  marker += '_'; marker += 'A' + v_pg; marker += '-';  marker += '1' + h_pg;
+  char marker_y = 'A' + v_pg, marker_x = '1' + h_pg;
+  marker += '_'; marker += marker_y; marker += '-';  marker += marker_x;
   string file_name = marker + (k == 0? "_empty.svg": ".svg");
   
   SVG svg (file_name.c_str(), field_width(), field_height());
@@ -51,5 +52,7 @@ void Page::write_SVG (const char *prefix, int h_pg, int v_pg)
   svg.add_line_segment (LineSegment (Point (field_width(), 0), Point (field_width(), field_height())));
   svg.add_line_segment (LineSegment (Point (0, field_height()), Point (field_width(), field_height())));
   svg.curve_end();
+  
+  if (!Opt.no_legend) svg.add_legend (marker.c_str());
 }
 

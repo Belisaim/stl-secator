@@ -7,8 +7,10 @@ public:
   float minx, miny, maxx, maxy;
   
   Region() { minx = 1e+30; miny = 1e+30; maxx = -1e+30; maxy = -1e+30; }
+  void operator= (Region &r) { minx = r.minx; miny = r.miny; maxx = r.maxx; maxy = r.maxy; }
   void init (float _minx, float _miny, float _maxx, float _maxy);
   bool in (Point p);
+  float square() { return (maxx - minx) * (maxy - miny); }
   void reduce (Point p);        // The point must be out of the region. Make it.
   void reduce (LineSegment ls); // Also
 };
@@ -29,9 +31,11 @@ bool Region::in (Point p)
 //-------------------------------------------------
 void Region::reduce (Point p)
 {
+  Region r1 = *this, r2 = *this;
   if (in (p)) {
-    if (maxx - p.x > p.x - minx) minx = p.x; else maxx = p.x;
-    if (maxy - p.y > p.y - miny) miny = p.y; else maxy = p.y;
+    if (maxx - p.x > p.x - minx) r1.minx = p.x; else r1.maxx = p.x;
+    if (maxy - p.y > p.y - miny) r2.miny = p.y; else r2.maxy = p.y;
+    *this = r1.square() > r2.square() ? r1: r2;
   }
 }
 

@@ -124,7 +124,7 @@ Solid::Solid (char *file) {
   readNextLine();
   p = strstr (buf, "solid");
   if (!p) { perror ("not ASCII file"); exit (-1); }
-  fprintf (stderr, "Title of the STL: %s\n", p + 6);
+  fprintf (stderr, "Title of the STL: %s", p + 6);
 }
 
 ////////////////////////////

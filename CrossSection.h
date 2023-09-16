@@ -26,7 +26,7 @@ void CrossSection::find_minmax()
 {
   Point A, B;
   int i, k = curve.size();
-  fprintf (stderr, "\nTotal line segments: %i\n\n", k);
+  fprintf (stderr, "Detected total line segments: %i\n", k);
   for (i = 0; i < k; i++) {
     A = curve[i].P1; B = curve[i].P2;
     if (A.x < minx) minx = A.x;
@@ -37,12 +37,12 @@ void CrossSection::find_minmax()
     if (B.y < miny) miny = B.y;
     if (B.x > maxx) maxx = B.x;
     if (B.y > maxy) maxy = B.y;
-    fprintf (stderr, "A: (%f, %f),\tB: (%f, %f)\n", A.x, A.y, B.x, B.y);
+//    fprintf (stderr, "A: (%f, %f),\tB: (%f, %f)\n", A.x, A.y, B.x, B.y);
   }
-  fprintf (stderr, "\nx: [%f, %f],\ty: [%f, %f]\n\n", minx, maxx, miny, maxy);
+//  fprintf (stderr, "\nx: [%f, %f],\ty: [%f, %f]\n\n", minx, maxx, miny, maxy);
   hori_size = maxx - minx;
   vert_size = maxy - miny;
-  fprintf (stderr, "Horizontal size: %.0fpx (%.0fmm).\nVertical size: %.0fpx (%.0fmm).\n\n",
+  fprintf (stderr, "Horizontal size: %.0fpx (%.0fmm).\nVertical size: %.0fpx (%.0fmm).\n",
     hori_size * Opt.PrintDPmm, hori_size, vert_size * Opt.PrintDPmm, vert_size
   );
 
@@ -55,13 +55,13 @@ void CrossSection::move_at_corner()
 
   for (i = 0; i < k; i++) {
     curve[i] = curve[i] - Point (minx, miny);
-    fprintf (stderr, "A: (%f, %f),\tB: (%f, %f)\n",
-      curve[i].P1.x, curve[i].P1.y, curve[i].P2.x, curve[i].P2.y);
+//    fprintf (stderr, "A: (%f, %f),\tB: (%f, %f)\n",
+//      curve[i].P1.x, curve[i].P1.y, curve[i].P2.x, curve[i].P2.y);
   }
   maxx -= minx;
   maxy -= miny;
   minx = miny = 0;
-  fprintf (stderr, "\nx: [%f, %f],\ty: [%f, %f]\n", minx, maxx, miny, maxy);
+//  fprintf (stderr, "x: [%.0f, %.0f],\ty: [%.0f, %.0f]\n", minx, maxx, miny, maxy);
 }
 
 //// Reflect by vertical /////////////////

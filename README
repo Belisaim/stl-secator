@@ -30,3 +30,7 @@ Options:
 Example:
   ./stl-secator --margin=15 --format=297:420 boat.stl &>/dev/null
 
+-------------------------
+Compile:
+  g++ stl-secator.cpp -o stl-secator
+

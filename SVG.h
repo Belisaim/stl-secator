@@ -6,7 +6,7 @@
 // Edit this if you want:
 const float LEGEND_SHIFT_X = 1; // mm
 const float LEGEND_SHIFT_Y = 1; // mm
-const float FontSize_mm = 7;
+const float FontSize_mm = 4;
 
 class SVG
 {
@@ -61,10 +61,12 @@ void SVG::add_legend (const char *legend)
   const int font_size = FontSize_mm / 25.4 * Opt.printer_dpi;
   int n = strlen (legend), len_in_dots = n * font_size;
   float len_in_mm = n * FontSize_mm;
-
-  if (len_in_mm > legend_place.maxx - legend_place.minx) perror ("Legend region is too short.");
-  if (FontSize_mm > legend_place.maxy - legend_place.miny) perror ("Legend region is too narrow.");
-
+/*
+  if (len_in_mm > legend_place.maxx - legend_place.minx)
+    fprintf (stderr, "Warning: legend region for \"%s\" is too short: %.0f mm\n", legend, legend_place.maxx - legend_place.minx);
+  if (FontSize_mm > legend_place.maxy - legend_place.miny)
+    fprintf (stderr, "Warning: legend region for \"%s\" is too narrow: %.0f mm\n", legend, legend_place.maxy - legend_place.miny);
+*/
   fprintf (f, "<text x = \"%i\" y=\"%i\" font-size=\"%i\" font-family=\"Courier\">\n",
     (int)(Opt.PrintDPmm * (legend_place.minx + LEGEND_SHIFT_X)),
     (int)(Opt.PrintDPmm * (legend_place.miny + LEGEND_SHIFT_Y + FontSize_mm)),

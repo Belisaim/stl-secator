@@ -55,8 +55,8 @@ void Poster::analyse()
 
   fprintf (stderr, "\nOrientation: %s\n",
     orientation == portrait ? "portrait": "landscape");
-  fprintf (stderr, "By horisontal %i pages\n", h_n[orientation]);
-  fprintf (stderr, "By   vertical %i pages\n", v_n[orientation]);
+  fprintf (stderr, "By horisontal %i pages\n",   h_n[orientation]);
+  fprintf (stderr, "By   vertical %i pages\n\n", v_n[orientation]);
   
   assert (h_n[orientation] <= MAX_PAGES_IN_ROW);
   assert (v_n[orientation] <= MAX_PAGES_IN_COL);
@@ -102,10 +102,10 @@ void Poster::write_SVG_preview (const char *prefix)
   int i, k = pCS->curve.size();
   float HS = h_n[orientation] * Opt.format[    orientation] - 2 * Opt.margin * (h_n[orientation] - 1);
   float VS = v_n[orientation] * Opt.format[1 - orientation] - 2 * Opt.margin * (v_n[orientation] - 1);
-  fprintf (stderr, "HS = %f, VS = %f\n", HS, VS);
+//  fprintf (stderr, "HS = %f, VS = %f\n", HS, VS);
 
   float scale = max (Opt.format[0] / min (VS, HS), Opt.format[1] / max (VS, HS));
-  fprintf (stderr, "Scale = %f\n", scale);
+//  fprintf (stderr, "Scale = %f\n", scale);
 
   string file_name = string ("preview_") + string (prefix) + string (".svg");
   SVG svg_preview (file_name.c_str(), HS * scale, VS * scale);
@@ -124,7 +124,7 @@ void Poster::write_SVG_preview (const char *prefix)
 
   svg_preview.curve_begin (" Page\'s frames ");
   float hs = piece[0][0].field_width(), vs = piece[0][0].field_height();
-  fprintf (stderr, "hs = %f, vs = %f\n", hs, vs);
+//  fprintf (stderr, "hs = %f, vs = %f\n", hs, vs);
   for (i = 0; i <= h_n[orientation]; i++)
     svg_preview.add_line_segment (LineSegment (Point (Opt.margin + hs * i, Opt.margin), Point (Opt.margin + hs * i, VS - Opt.margin)) * scale);
   for (i = 0; i <= v_n[orientation]; i++)

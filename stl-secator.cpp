@@ -9,7 +9,7 @@ int main (int argc, char *argv[])
   
   fprintf (stderr, "\nMargin: %.0f mm", Opt.margin);
   fprintf (stderr, "\nPage format: %.0f:%.0f", Opt.format[0], Opt.format[1]);
-  fprintf (stderr, "\nPrinter: %i DPI\n", Opt.printer_dpi);
+  fprintf (stderr, "\nPrinter: %i DPI\n\n", Opt.printer_dpi);
 
   size_t i, k = 0;
   string stl_file = Opt.stl_file, prefix;

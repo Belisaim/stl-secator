@@ -1,0 +1,1 @@
+g++ stl-secator.cpp -o stl-secator

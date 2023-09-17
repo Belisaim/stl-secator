@@ -1,4 +1,4 @@
 #!/bin/bash
 
-../stl-secator --no-preview ulitka.ascii.stl > cross_section.dat
+../stl-secator --z=5 snail.ascii.stl > cross_section.dat
 ./cross_section.gnuplot

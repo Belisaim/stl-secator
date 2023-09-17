@@ -107,8 +107,9 @@ void Poster::write_SVG_preview (const char *prefix)
   float scale = max (Opt.format[0] / min (VS, HS), Opt.format[1] / max (VS, HS));
 //  fprintf (stderr, "Scale = %f\n", scale);
 
-  string file_name = string ("preview_") + string (prefix) + string (".svg");
-  SVG svg_preview (file_name.c_str(), HS * scale, VS * scale);
+  char file_name[256];
+  snprintf (file_name, 256, "preview_%s_z%g.svg", prefix, Opt.z);
+  SVG svg_preview (file_name, HS * scale, VS * scale);
 
   svg_preview.curve_begin (" Cross section curve ");
   for (i = 0; i < k; i++)

@@ -7,6 +7,7 @@ int main (int argc, char *argv[])
   if (argc < 2) { Opt.print_usage(); return -1; }
   Opt.init (argv, argc);
   
+  fprintf (stderr, "\nCross section plane: z = %g", Opt.z);
   fprintf (stderr, "\nMargin: %.0f mm", Opt.margin);
   fprintf (stderr, "\nPage format: %.0f:%.0f", Opt.format[0], Opt.format[1]);
   fprintf (stderr, "\nPrinter: %i DPI\n\n", Opt.printer_dpi);
@@ -15,10 +16,8 @@ int main (int argc, char *argv[])
   string stl_file = Opt.stl_file, prefix;
 
   i = stl_file.find (".stl");
-  if (i != string::npos)
-    prefix = stl_file.substr (0, i);
-  else
-    prefix = stl_file;
+  if (i != string::npos) prefix = stl_file.substr (0, i);
+  else                   prefix = stl_file;
 
   Solid solid (Opt.stl_file);
   CrossSection cross_section;

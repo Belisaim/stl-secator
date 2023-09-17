@@ -4,6 +4,7 @@
 #include <string.h>
 #include <math.h>
 #include <ctype.h>
+#include "Options.h"
 
 #define L 128
 
@@ -139,7 +140,7 @@ bool Solid::getNextTri() {
         if (p = strstr (buf, "vertex")) {
           p = strtok (p += 7, " \t"); t.v[i].x = readFloat();
           p = strtok (NULL  , " \t"); t.v[i].y = readFloat();
-          p = strtok (NULL  , " \t"); t.v[i].z = readFloat();
+          p = strtok (NULL  , " \t"); t.v[i].z = readFloat() - Opt.z;
         }
       }
       readNextLine();

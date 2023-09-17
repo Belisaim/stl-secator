@@ -35,14 +35,14 @@ void Page::copy_data (vector <LineSegment> *src, float from_x, float from_y)
 void Page::write_SVG (const char *prefix, int h_pg, int v_pg)
 {
   int i, k = curve_part.size();
-  string marker = prefix;
-  char marker_y = 'A' + v_pg, marker_x = '1' + h_pg;
-  marker += '_'; marker += marker_y; marker += '-';  marker += marker_x;
-  string file_name = marker + (k == 0? "_empty.svg": ".svg");
-  
+  char marker_page[4] = { (char)('A' + v_pg), '-', (char)('1' + h_pg), '\0' };
+  char marker_z[16];
+  sprintf (marker_z, "z%g", Opt.z);
+
+  string file_name = string(prefix) + "_" + marker_z + "_" + marker_page + (k == 0? "_empty.svg": ".svg");
   SVG svg (file_name.c_str(), field_width(), field_height());
 
-  svg.curve_begin (marker.c_str());
+  svg.curve_begin (marker_z);
   for (i = 0; i < k; i++) svg.add_line_segment (curve_part[i]);
   svg.curve_end();
 
@@ -53,6 +53,7 @@ void Page::write_SVG (const char *prefix, int h_pg, int v_pg)
   svg.add_line_segment (LineSegment (Point (0, field_height()), Point (field_width(), field_height())));
   svg.curve_end();
   
-  if (!Opt.no_legend) svg.add_legend (marker.c_str());
+  sprintf (marker_z, "z=%g", Opt.z);
+  if (!Opt.no_legend) svg.add_legend (marker_page, marker_z, prefix);
 }
 

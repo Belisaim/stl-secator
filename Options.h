@@ -13,6 +13,7 @@ public:
   int printer_dpi; // dots per inch
   float PrintDPmm;
   bool no_legend, no_preview;
+  float z;
 
   Options();
   void print_usage ();
@@ -20,7 +21,7 @@ public:
   bool recognize (char *option);
 };
 
-// Global varioable
+// Global variable
 Options Opt;
 
 //--------------------------
@@ -31,6 +32,7 @@ Options::Options()
   no_legend = no_preview = false;
   printer_dpi = 600;
   PrintDPmm = printer_dpi / 25.4;
+  z = 0;
 }
 
 //-------------------------------------------------
@@ -50,6 +52,7 @@ bool Options::recognize (char *option)
   char *p;
   if (strstr (option, "--no-preview")) { no_preview = true; return true; }
   if (strstr (option, "--no-legend" )) { no_legend  = true; return true; }
+  if (p = strstr (option, "--z="      )) {      z = atof (p += 4); return true; }
   if (p = strstr (option, "--margin=" )) { margin = atof (p += 9); return true; }
   if (p = strstr (option, "--dpi=" )) {
     printer_dpi = atoi (p += 6);
@@ -68,16 +71,17 @@ bool Options::recognize (char *option)
 //-----------------------------
 void Options::print_usage ()
 {
-  puts ("\nUtility stl-secator is intended to make cross section of 3D object stored in ASCII STL file by the plane z = 0.");
-  puts ("It is assumed to be used together with admesh utility.");
-  puts ("Admesh cans convert binary STL to ASCII STL, move and turn 3D object in order to make cross section in any place of object.");
-  puts ("Bash script geves possibility to automate this process.");
+  puts ("\nUtility stl-secator is intended to make cross section of 3D object stored in ASCII STL file by the plane z = C.");
+  puts ("Utility admesh cans convert binary STL to ASCII STL.");
   puts ("The result of stl-secator is SVG files.");
   puts ("They are parts of one big poster (in general case) to be printed on small printer and pasted together.");
   puts ("Moreover, stl-secator outputs in stdout a data of cross section to display its by gnuplot for example.\n");
   puts ("Usage:");
   puts ("\tstl-secator [options] <ascii_stl_file>\n");
   puts ("Options:");
+  puts ("\t--z=C\t\tPlane z = C makes a cross section.");
+  puts ("\t\t\tC is float, millimeters.");
+  puts ("\t\t\tBy default 0.");
   puts ("\t--margin=n\tWidth of empty fields in edges on page for pasting together of a few pages.");
   puts ("\t\t\tn is float, millimeters.");
   puts ("\t\t\tBy default 10.");
@@ -89,6 +93,6 @@ void Options::print_usage ()
   puts ("\t--no-preview\tDo not create preview SVG file.");
   puts ("\t\t\tBy default false.");
   puts ("\nExample:");
-  puts ("\t./stl-secator --margin=15 --format=297:420 boat.stl &>/dev/null\n\n");
+  puts ("\t./stl-secator --z=250 --margin=15 --format=297:420 boat.stl &>/dev/null\n\n");
 }
 
